@@ -22,25 +22,21 @@ jobs:
 
   generate_keymaps:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'  # Specify the Python version you want
-
-      - name: Install keymap-drawer
+      - name: Install pipx
         run: |
-          python -m pip install --upgrade pip
-          pip install keymap-drawer  # Replace with the correct package name if different
-
+          python -m pip install --user pipx
+          python -m pipx ensurepath
+          export PATH=$PATH:~/.local/bin  # Ensure pipx is in PATH
+      - name: Install keymap-drawer using pipx
+        run: |
+          pipx install keymap-drawer  # Replace with the correct package name if different
       - name: Generate keymaps
         run: |
           for file in john_doe/*.json; do
-            keymap-drawer "$file"  # Replace with the correct command for keymap-drawer if needed
+            pipx run keymap-drawer -q 12 "$file"  # Use pipx to run the installed keymap-drawer
           done
 
       - name: Commit and push changes
@@ -52,4 +48,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
