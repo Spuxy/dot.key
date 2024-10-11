@@ -19,7 +19,6 @@ jobs:
     if: always() && !cancelled()
     needs: build
 
-
   generate_keymaps:
     runs-on: ubuntu-latest
     steps:
@@ -32,12 +31,11 @@ jobs:
           export PATH=$PATH:~/.local/bin  # Ensure pipx is in PATH
       - name: Install keymap-drawer using pipx
         run: |
-          pipx install keymap-drawer  # Replace with the correct package name if different
-      - name: Generate keymaps
+          pipx install keymap-drawer
+      - name: Generate keymap
         run: |
-          for file in john_doe/*.json; do
-            pipx run keymap-drawer -c 12 "$file"  # Use pipx to run the installed keymap-drawer
-          done
+          pipx run keymap -c 12 -q keyboards/crkbd/keymap.json > pre-draw-phase.yml
+          pipx run keymap draw pre-draw-phase.yml > layout.svg
 
       - name: Commit and push changes
         run: |
@@ -48,3 +46,4 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
