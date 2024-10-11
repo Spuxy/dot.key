@@ -18,3 +18,38 @@ jobs:
     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@main
     if: always() && !cancelled()
     needs: build
+
+
+  generate_keymaps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # Specify the Python version you want
+
+      - name: Install keymap-drawer
+        run: |
+          python -m pip install --upgrade pip
+          pip install keymap-drawer  # Replace with the correct package name if different
+
+      - name: Generate keymaps
+        run: |
+          for file in john_doe/*.json; do
+            keymap-drawer "$file"  # Replace with the correct command for keymap-drawer if needed
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto-generated keymap from JSON"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
