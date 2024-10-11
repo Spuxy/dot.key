@@ -36,7 +36,7 @@ jobs:
       - name: Generate keymaps
         run: |
           for file in john_doe/*.json; do
-            pipx run keymap-drawer -q 12 "$file"  # Use pipx to run the installed keymap-drawer
+            pipx run keymap-drawer -c 12 "$file"  # Use pipx to run the installed keymap-drawer
           done
 
       - name: Commit and push changes
