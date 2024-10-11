@@ -34,8 +34,8 @@ jobs:
           pipx install keymap-drawer
       - name: Generate keymap
         run: |
-          pipx run keymap -c 12 -q keyboards/crkbd/keymap.json > pre-draw-phase.yml
-          pipx run keymap draw pre-draw-phase.yml > layout.svg
+          keymap -c 12 -q keyboards/crkbd/keymap.json > pre-draw-phase.yml
+          keymap draw pre-draw-phase.yml > layout.svg
 
       - name: Commit and push changes
         run: |
