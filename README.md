@@ -7,5 +7,4 @@ This is tailored for my usage and my keyboards
 ### Workflow (GitHub actions 🚀)
 If you are interested, then i made a custom job to generate the current layout of keyboards by pushing to the branch
 
-![my-keyboard-layout](./layout.svg)
 <img src="./layout.svg">
