@@ -1,4 +1,11 @@
 {
+    "maintainer": "spuxy",
+    "url": "spuxy.github.io",
+    "pin_compatible": "promicro",
+    "processor": "atmega32u4",
+    "pin_compatible": "promicro",
+    "board": "GENERIC_RP_RP2040",
+    "development_board": "promicro",
     "features": {
         "rgblight": false
     },
@@ -68,7 +75,6 @@
             {"matrix": [6, 0], "x": 224, "y": 41, "flags": 1}
         ]
     },
-    "development_board": "promicro",
     "layout_aliases": {
         "LAYOUT": "LAYOUT_split_3x6_3"
     },
